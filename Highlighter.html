@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Highlight</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+<style>
+.identicaalItems {
+    background: red;
+    color: black;
+}
+
+.minorChangesItems {
+    background: yellow;
+    color: black;
+}
+
+.relatedMeaningItems {
+    background: green;
+    color: black;
+}
+
+#textData {
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    vertical-align: middle;
+    border: 1px solid black;
+    padding: 10px;
+}
+</style>
+</head>
+<body>
+    <div id="textData" class="context">To find out the word and character count of your writing, simply copy and paste text into the tool or write directly into the text area. Once done, the free online tool will display both counts for the text that's been inserted. This can be useful in many instances, but it can be especially helpful when you are writing for something that has a character minimum or limit.
+
+            Character and word limits are quite common these days on the Internet. The one that most people are likely aware of is the 140 character limit for tweets on Twitter, but character limits aren't restricted to Twitter. There are limits for text messages (SMS), Yelp reviews, Facebook posts, Pinterest pins, Reddit titles and comments, eBay titles and descriptions as well as many others. Knowing these limits, as well as being able to see as you approach them, will enable you to better express yourself within the imposed limits.
+            
+            For students, there are usually limits or minimums for homework assignments. The same is often true for college applications. Abiding by these can have a major impact on how this writing is graded and reviewed, and it shows whether or not you're able to follow basic directions. Character counter can make sure you don't accidentally go over limits or fail to meet minimums that can be detrimental to these assignments.
+            
+            This information can also be quite helpful for writers. Knowing the number of words and characters can help writers better understand the length of their writing, and work to display the pages of their writing in a specific way. For those who write for magazines and newspapers where there is limited space, knowing these counts can help the writer get the most information into that limited space.
+            
+            For job seekers, knowing the number of characters of your resume can be essential to get all the information you want onto a single page. You can fool around with different fonts, their sizes and spacing to adjust the number of characters you can fit on a single page, but it's important to know the number you're attempting to fit on the page.
+            
+    </div>
+<script>
+   var data = {
+	"Text" : document.getElementById("textData").textContent,
+	"identical": {
+				   "source": {
+					"chars": {
+						"starts":  [3, 600, 785, 1000],
+						"lengths": [10, 50, 30, 50]
+					}
+				   }
+            },	
+	"minorChanges": {
+				"source": {
+					"chars": {
+						"starts": [400, 900],
+						"lengths": [50, 50]
+					}
+				}
+            },
+	"relatedMeaning": {
+				"source": {
+					"chars": {
+						"starts": [200],
+						"lengths": [100]
+					}
+				}
+            }
+    }
+
+var identicalStartsArray = data.identical.source.chars.starts;
+var identicalLengthsArray = data.identical.source.chars.lengths;
+var minorChangesStartsArray = data.minorChanges.source.chars.starts;
+var minorChangesLengthsArray = data.minorChanges.source.chars.lengths;
+var relatedMeaningStartsArray = data.relatedMeaning.source.chars.starts;
+var relatedMeaningLengthsArray = data.relatedMeaning.source.chars.lengths;
+
+/* This code is to convert data in a more readable format like this
+ identicalItems:  [
+   {
+      "start":3,
+      "length":10
+   },
+   {
+      "start":600,
+      "length":50
+   },
+   {
+      "start":785,
+      "length":30
+   },
+   {
+      "start":1000,
+      "length":50
+   }
+]
+*/
+var identicalItems = identicalStartsArray.map(function(e, index) {
+    return {
+        start: e,
+        length: identicalLengthsArray[index]
+    }
+});
+
+
+var minorChangesItems = minorChangesStartsArray.map(function(e, index) {
+    return {
+        start: e,
+        length: minorChangesLengthsArray[index]
+    }
+});
+
+var relatedMeaningItems = relatedMeaningStartsArray.map(function(e, index) {
+    return {
+        start: e,
+        length: relatedMeaningLengthsArray[index]
+    }
+});
+
+var context = document.querySelector(".context"); // requires an element with class "context" to exist
+var instance = new Mark(context);
+var identicalItemsOptions = {
+    "element": "mark",
+    "className": "identicaalItems"
+}
+
+var minorChangesItemsOptions = {
+    "element": "mark",
+    "className": "minorChangesItems"
+}
+
+var relatedMeaningItemsOptions = {
+    "element": "mark",
+    "className": "relatedMeaningItems"
+}
+
+instance.markRanges(identicalItems, identicalItemsOptions);
+instance.markRanges(minorChangesItems, minorChangesItemsOptions);
+instance.markRanges(relatedMeaningItems, relatedMeaningItemsOptions);
+
+</script>
+    
+</body>
+</html>
